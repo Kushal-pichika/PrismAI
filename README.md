@@ -1,16 +1,64 @@
-# React + Vite
+# PrismAI 🎙️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PrismAI is a real-time audio processing system that detects specific keywords from a live microphone stream and provides immediate feedback. It uses a high-accuracy speech recognition model on the backend and a responsive React frontend.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Dynamic Keyword Detection**: Define a custom list of keywords in the UI; the system updates its recognition grammar in real-time.
+- **Low-Latency Streaming**: Uses `AudioWorklet` for efficient, non-blocking audio processing and WebSockets for full-duplex communication.
+- **High Accuracy**: Powered by the `vosk-model-en-us-0.22` model for precise speech-to-text conversion.
+- **Audio Feedback**: Integrated with the browser's `SpeechSynthesis API` to speak detected keywords back to the user.
+- **Strict Matching**: Implements exact word matching and stability checks to eliminate false positives.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React, Vite, Web Audio API (`AudioWorklet`), WebSockets.
+- **Backend**: FastAPI (Python), Vosk Speech Recognition, Uvicorn.
+- **Audio Format**: Mono PCM, 16kHz, 16-bit signed integers.
 
-## Expanding the ESLint configuration
+## 📦 Setup Instructions
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Backend Setup
+```bash
+cd backend
+pip install -r requirements.txt
+# Ensure you have the Vosk model at ./backend/models/vosk-model-en-us-0.22
+python main.py
+```
+
+### 2. Frontend Setup
+```bash
+npm install
+npm run dev
+```
+Open the local server URL (e.g., `http://localhost:5173`) in your browser.
+
+## 📖 Usage
+
+1. **Set Keywords**: Enter comma-separated keywords in the input field (e.g., `help, alert, system`).
+2. **Start Listening**: Click the **Start** button. The frontend connects to the backend and sends the keyword list.
+3. **Speak**: Say one of your defined keywords clearly.
+4. **Result**: When a keyword is detected, the backend sends a trigger, and the browser will speak the word aloud.
+
+## 📂 Project Structure
+
+```text
+PrismAI/
+├── backend/
+│   ├── main.py              # FastAPI server & Vosk logic
+│   ├── models/              # Vosk model files (git-ignored)
+│   └── requirements.txt     # Python dependencies
+├── public/
+│   └── audio-worklet-processor.js  # Low-level audio processing
+├── src/
+│   ├── components/
+│   │   └── AudioInput.jsx   # UI for keyword input and controls
+│   ├── utils/
+│   │   └── audioProcessor.js # Audio context and worklet management
+│   └── App.jsx              # Main application logic & WebSocket handler
+├── package.json
+└── .gitignore
+```
+
+## ⚖️ License
+MIT
