@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(pip install:*)",
+      "Bash(python main.py)",
+      "Bash(curl:*)",
+      "Bash(unzip -q vosk-model-small-en-us-0.15.zip)",
+      "Bash(mv vosk-model-small-en-us-0.15 vosk-model-small-en-us-0.15-orig)",
+      "Bash(tar -xzf vosk-model-small-en-us-0.15.tgz)",
+      "Bash(rm vosk-model-small-en-us-0.15.tgz vosk-model-small-en-us-0.15.zip)",
+      "Bash(powershell -Command \"Expand-Archive -Path vosk-model-small-en-us-0.15.zip -DestinationPath . -Force\")",
+      "Bash(unzip -q ../vosk-model-small-en-us-0.15.zip)",
+      "Bash(unzip -q model.zip)",
+      "Bash(rm model.zip)",
+      "Bash(pkill:*)",
+      "Bash(python -m json.tool)",
+      "Bash(ls -la /d/prismai/backend/models/../models/*.output)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :8000)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}
